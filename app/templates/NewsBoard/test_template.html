@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test page</title>
+</head>
+<body>
+    <h1>WELCOME TO TEST PAGE</h1>
+    {% for object in objects %}
+        <h3>{{ object.title }}</h3>
+        {{ object.text }}
+        <p>{{ object.date_added }}</p>
+        <hr>
+    {% endfor %}
+</body>
+</html>
