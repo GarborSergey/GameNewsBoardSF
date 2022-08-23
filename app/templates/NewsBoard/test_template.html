@@ -8,7 +8,7 @@
     <h1>WELCOME TO TEST PAGE</h1>
     {% for object in objects %}
         <h3>{{ object.title }}</h3>
-        {{ object.text }}
+        {{ object.text|safe }}
         <p>{{ object.date_added }}</p>
         <hr>
     {% endfor %}
