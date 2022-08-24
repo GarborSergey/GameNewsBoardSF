@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Test page</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Add Position{% endblock title %}
+
+{% block content %}
     <h1>WELCOME TO TEST PAGE</h1>
     {% for object in objects %}
         <h3>{{ object.title }}</h3>
@@ -12,5 +12,4 @@
         <p>{{ object.date_added }}</p>
         <hr>
     {% endfor %}
-</body>
-</html>
+{% endblock content %}
