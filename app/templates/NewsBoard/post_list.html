@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Position{% endblock title %}
+
+{% block content %}
+    <h1>ALL POSTS</h1>
+    {% for post in posts %}
+        <h3>{{ post.title }}</h3>
+        <p>Categories: {% for category in post.category.all %} {{ category.name }} / {% endfor %}</p>
+        <p>Author: {{ post.author }}</p>
+        <p>{{ post.date_added }}</p>
+        <a href="{% url 'NewsBoard:post-detail' post.id %}">View</a>
+        <hr>
+    {% endfor %}
+{% endblock content %}

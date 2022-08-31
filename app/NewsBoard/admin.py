@@ -3,11 +3,11 @@ from django.contrib import admin
 
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-from .models import Post
+from .models import Post, PostCategory
 
 
 class PostAdminForm(forms.ModelForm):
-    text = forms.CharField(widget=CKEditorUploadingWidget())
+    content = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
         model = Post
@@ -19,3 +19,4 @@ class PostAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(PostCategory)
