@@ -107,7 +107,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ======================= CKEDITOR SETTINGS =======================
-CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_UPLOAD_PATH = MEDIA_ROOT / "uploads/"
 
 CKEDITOR_CONFIGS = {
     'default': {
