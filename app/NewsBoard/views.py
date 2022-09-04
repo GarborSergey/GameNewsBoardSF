@@ -16,7 +16,6 @@ class MainPage(View):
 
     def get(self, request):
         context = dict()
-        context['username'] = request.user.username
 
         return render(request, self.template_name, context)
 

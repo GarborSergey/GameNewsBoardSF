@@ -21,13 +21,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # MY APPS
     'NewsBoard.apps.NewsboardConfig',
+    'myaccount.apps.MyaccountConfig',
 
-    # WYSIWYG
+    # WYSIWYG Ckeditor
     'ckeditor',
     'ckeditor_uploader',
+
+    # allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
 ]
 
 MIDDLEWARE = [
@@ -106,7 +114,34 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ======================= CKEDITOR SETTINGS =======================
+# ======================== allauth SETTINGS ========================
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+LOGIN_REDIRECT_URL = 'NewsBoard:main-page'
+ACCOUNT_SIGNUP_FORM_CLASS = 'myaccount.forms.SignupForm'
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+# ===================================================================
+
+# ========================= EMAIL SETTINGS ==========================
+SERVER_EMAIL = 'recipecontact@mail.ru'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = 'recipecontact@mail.ru'
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
+EMAIL_USE_TLS = True
+EMAIL_FROM = 'recipecontact@mail.ru'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+ADMINS = [
+    ('Sergey', 'garborfersru@gmail.com'),
+]
+# ===================================================================
+
+# ======================== Ckeditor SETTINGS ========================
 CKEDITOR_UPLOAD_PATH = MEDIA_ROOT / "uploads/"
 
 CKEDITOR_CONFIGS = {
@@ -176,3 +211,5 @@ CKEDITOR_CONFIGS = {
     }
 }
 # =================================================================
+
+SITE_ID = 1
