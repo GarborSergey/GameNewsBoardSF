@@ -120,7 +120,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 LOGIN_REDIRECT_URL = 'NewsBoard:main-page'
 ACCOUNT_SIGNUP_FORM_CLASS = 'myaccount.forms.SignupForm'
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
-
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
