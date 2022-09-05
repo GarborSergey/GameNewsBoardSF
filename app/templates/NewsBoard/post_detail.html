@@ -9,8 +9,9 @@
     <p>Author: {{ post.author }}</p>
     <p>{{ post.date_added }}</p>
     <hr>
-    <button class="btn btn-danger"><a href="{% url 'NewsBoard:post-delete' post.id %}">Delete </a></button>
-    <button class="btn btn-danger"><a href="{% url 'NewsBoard:post-edit' post.id %}">Edit </a></button>
-
+    {% if user == post.author %}
+        <button class="btn btn-danger"><a href="{% url 'NewsBoard:post-delete' post.id %}">Delete </a></button>
+        <button class="btn btn-danger"><a href="{% url 'NewsBoard:post-edit' post.id %}">Edit </a></button>
+    {% endif %}
 
 {% endblock content %}

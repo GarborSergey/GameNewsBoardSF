@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
+    # captcha
+    'captcha',
+
 ]
 
 MIDDLEWARE = [
