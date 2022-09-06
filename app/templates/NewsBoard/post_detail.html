@@ -12,6 +12,13 @@
     {% if user == post.author %}
         <button class="btn btn-danger"><a href="{% url 'NewsBoard:post-delete' post.id %}">Delete </a></button>
         <button class="btn btn-danger"><a href="{% url 'NewsBoard:post-edit' post.id %}">Edit </a></button>
+    {% else %}
+        {% if user not in post.liked.all %}
+            <button class="btn btn-success"><a href="{% url 'NewsBoard:post-like' post.id %}">Super</a></button>
+        {% else %}
+            <button class="btn btn-danger"><a href="{% url 'NewsBoard:post-dislike' post.id %}">Not very</a></button>
+        {% endif %}
     {% endif %}
+
 
 {% endblock content %}

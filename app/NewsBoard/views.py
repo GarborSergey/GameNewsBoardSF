@@ -1,7 +1,8 @@
 import http.client
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from django.views import View
@@ -78,3 +79,26 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
         else:
             raise http.Http404
 # ===============================================================
+
+
+@login_required
+def add_post_to_favorites(request, pk):
+    user = request.user
+    post = Post.objects.get(id=pk)
+    if user == post.author:
+        raise http.Http404
+    post.liked.add(user)
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required
+def remove_post_from_favorites(request, pk):
+    user = request.user
+    post = Post.objects.get(id=pk)
+    if user not in post.liked.all():
+        raise http.Http404
+    post.liked.remove(user)
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+
