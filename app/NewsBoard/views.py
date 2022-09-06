@@ -1,5 +1,6 @@
 import http.client
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
@@ -23,6 +24,7 @@ class MainPage(View):
 # ===================== CRUD Post MODEL ========================
 class PostList(ListView):
     """List of all posts on the web-site"""
+    paginate_by = 5
     model = Post
     ordering = '-date_added'
     template_name = 'NewsBoard/post_list.html'
@@ -36,7 +38,7 @@ class PostDetail(DetailView):
     template_name = 'NewsBoard/post_detail.html'
 
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView):
     """Created new post in web-site"""
     model = Post
     form_class = PostForm
@@ -49,7 +51,7 @@ class PostCreate(CreateView):
         return super(PostCreate, self).form_valid(form)
 
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin, DeleteView):
     """Delete selected post in web-site"""
     model = Post
     template_name = 'NewsBoard/post_delete.html'
@@ -63,7 +65,7 @@ class PostDelete(DeleteView):
             raise http.Http404
 
 
-class PostUpdate(UpdateView):
+class PostUpdate(LoginRequiredMixin, UpdateView):
     """Update-edit selected post in web-site"""
     model = Post
     form_class = PostForm
