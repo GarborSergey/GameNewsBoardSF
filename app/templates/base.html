@@ -45,6 +45,15 @@
             </li>
           </ul>
           <!-- RIGHT NAV-BAR -->
+          {% if user.is_authenticated %}
+          <span class="avatar">
+              {% if user.profile.avatar %}
+                  <img src="{{ user.profile.avatar.url }}">
+              {% else %}
+                  <img src="{% static 'img/default_user.png' %}">
+              {% endif %}
+          </span>
+          {% endif %}
           <ul class="navbar-nav justify-content-end">
               {% if user.is_authenticated %}
                   <li class="nav-item">

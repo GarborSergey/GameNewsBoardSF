@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}My posts{% endblock title %}
+
+{% block content %}
+    <h1>My posts</h1>
+    {% for post in posts %}
+        <h3>{{ post.title }}</h3>
+        <p>Categories: {% for category in post.category.all %} {{ category.name }} / {% endfor %}</p>
+        <p>Rating: {{ post.liked.count }}</p>
+        <p>Author: {{ post.author }}</p>
+        <p>{{ post.date_added }}</p>
+        <a href="{% url 'NewsBoard:post-detail' post.id %}">View</a>
+        <br>
+        <a href="{% url 'NewsBoard:message-list' post.id %}">View messages</a>
+        <hr>
+    {% endfor %}
+
+{% endblock content %}

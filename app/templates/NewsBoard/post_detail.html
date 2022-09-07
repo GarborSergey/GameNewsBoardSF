@@ -7,7 +7,7 @@
     <h5>Categories: {% for category in post.category.all %} {{ category.name }} / {% endfor %}</h5>
     {{ post.content|safe }}
     <p>Author: {{ post.author }}</p>
-    <p>{{ post.date_added }}</p>
+    <p>{{ post.date_added|date:"d.m.Y" }}</p>
     <hr>
     {% if user == post.author %}
         <button class="btn btn-danger"><a href="{% url 'NewsBoard:post-delete' post.id %}">Delete </a></button>
@@ -18,7 +18,19 @@
         {% else %}
             <button class="btn btn-danger"><a href="{% url 'NewsBoard:post-dislike' post.id %}">Not very</a></button>
         {% endif %}
+        <br>
+        <button class="btn btn-danger"><a href="{% url 'NewsBoard:message-to-post' post.id %}">Send message to author</a></button>
     {% endif %}
-
+    {% if messages %}
+        <br>
+        <h5>Comments:</h5>
+        <hr>
+        {% for message in messages %}
+            <p>{{ message.content|safe }}</p>
+            <p>{{ message.date_added|date:"d.m.Y"}}</p>
+            <p>{{ message.sender.username }}</p>
+            <hr>
+        {% endfor %}
+    {% endif %}
 
 {% endblock content %}

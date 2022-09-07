@@ -9,7 +9,7 @@
         <p>Categories: {% for category in post.category.all %} {{ category.name }} / {% endfor %}</p>
         <p>Rating: {{ post.liked.count }}</p>
         <p>Author: {{ post.author }}</p>
-        <p>{{ post.date_added }}</p>
+        <p>Published: {{ post.date_added|date:"d.m.Y" }}</p>
         <a href="{% url 'NewsBoard:post-detail' post.id %}">View</a>
         <hr>
     {% endfor %}

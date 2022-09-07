@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from .models import UserProfile
 from .forms import ProfileForm
 
+
 @login_required
 def profile(request):
     user = request.user

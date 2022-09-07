@@ -25,12 +25,13 @@ class Post(models.Model):
         return reverse('NewsBoard:post-detail', args=[str(self.id)])
 
 
-class Messages(models.Model):
+class Message(models.Model):
     content = models.TextField()
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post')
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender_user')
     recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipient_user')
     date_added = models.DateTimeField(auto_now_add=True)
+    public = models.BooleanField(default=False)
 
 
 

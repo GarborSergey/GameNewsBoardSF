@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Messages {% endblock title %}
+
+{% block content %}
+    <h1>Messages on post "{{ post_title }}"</h1>
+    {% for message in messages %}
+        <p>{{ message.content|safe }}</p>
+        <p>{{ message.date_added|date:"d.m.Y"}}</p>
+        <p>{{ message.sender.username }}</p>
+        <hr>
+        {% if message.public %}
+            <button class="btn btn-danger"><a href="{% url 'NewsBoard:message-public' message.id %}">Hide</a></button>
+        {% else %}
+            <button class="btn btn-success"><a href="{% url 'NewsBoard:message-public' message.id %}">Publish</a></button>
+        {% endif %}
+        <button class="btn btn-danger"><a href="{% url 'NewsBoard:message-delete' message.id %}">Delete </a></button>
+
+    {% empty %}
+        <h3>No one has sent messages to this post</h3>
+    {% endfor %}
+
+{% endblock content %}
