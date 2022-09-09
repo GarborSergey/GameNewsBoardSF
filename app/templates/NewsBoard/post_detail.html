@@ -4,7 +4,7 @@
 {% block title %}Post {{ post.id }}{% endblock title %}
 
 {% block content %}
-    <td>
+    <br>
     <h1>{{ post.title }}</h1>
     <h5>Categories: {% for category in post.category.all %} {{ category.name }} / {% endfor %}</h5>
     {{ post.content|safe }}
@@ -24,6 +24,7 @@
         <button class="btn btn-danger"><a href="{% url 'NewsBoard:message-to-post' post.id %}">Send message to author</a></button>
     {% endif %}
     {% if messages %}
+        <br>
         <br>
         <h5>Comments:</h5>
         <hr>
