@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Post {{ post.id }}{% endblock title %}
 
 {% block content %}
+    <td>
     <h1>{{ post.title }}</h1>
     <h5>Categories: {% for category in post.category.all %} {{ category.name }} / {% endfor %}</h5>
     {{ post.content|safe }}
@@ -27,8 +29,15 @@
         <hr>
         {% for message in messages %}
             <p>{{ message.content|safe }}</p>
-            <p>{{ message.date_added|date:"d.m.Y"}}</p>
-            <p>{{ message.sender.username }}</p>
+            <span class="avatar">
+                {% if message.sender.profile.avatar %}
+                    <img src="{{ message.sender.profile.avatar.url }}">
+                {% else %}
+                    <img src="{% static 'img/default_user.png' %}">
+                {% endif %}
+            </span>
+            {{ message.sender.username }}
+            <div style="text-align: right;">{{ message.date_added|date:"d.m.Y"}}</div>
             <hr>
         {% endfor %}
     {% endif %}
