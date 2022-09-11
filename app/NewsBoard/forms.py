@@ -21,7 +21,7 @@ class PostForm(forms.ModelForm):
 
 class MessageForm(forms.ModelForm):
     content = forms.CharField(widget=CKEditorUploadingWidget())
-    # captcha = CaptchaField()
+    captcha = CaptchaField()
 
     class Meta:
         model = Message

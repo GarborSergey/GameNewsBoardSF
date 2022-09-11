@@ -8,4 +8,10 @@
         {{ form.as_p }}
         <input type="submit" value="Save">
     </form>
+
+    {% if user.profile.avatar %}
+        <span class="big-avatar">
+            <img src="{{ user.profile.avatar.url }}">
+        </span>
+    {% endif %}
 {% endblock content %}

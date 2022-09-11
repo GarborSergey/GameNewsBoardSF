@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Add Position{% endblock title %}
 
@@ -9,8 +10,17 @@
         <p>Categories: {% for category in post.category.all %} {{ category.name }} / {% endfor %}</p>
         <p>Rating: {{ post.liked.count }}</p>
         <p>Author: {{ post.author }}</p>
+        <span class="avatar">
+            {% if post.author.profile.avatar %}
+                <img src="{{ post.author.profile.avatar.url }}">
+            {% else %}
+                <img src="{% static 'img/default_user.png' %}">
+            {% endif %}
+        </span>
         <p>Published: {{ post.date_added|date:"d.m.Y" }}</p>
-        <a href="{% url 'NewsBoard:post-detail' post.id %}">View</a>
+        <form action="{% url 'NewsBoard:post-detail' post.id %}">
+            <button name="submit" class="btn btn-dark"><i class="bi bi-eye"></i> View</button>
+        </form>
         <hr>
     {% endfor %}
 

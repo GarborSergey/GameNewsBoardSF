@@ -9,8 +9,8 @@
 .pagination > li > span:focus,
 .pagination > li > span:hover
 {
-    color: #5a5a5a;
-    background-color: #eee;
+    color: white;
+    background-color: black;
     border-color: black;
 }
 
@@ -18,13 +18,13 @@
 {
     color: black;
     background-color: white !Important;
-    border: solid 1px white !Important;
+    border: solid 1px black !Important;
 }
 
 .pagination > .active > a:hover
 {
-    background-color: #5A4181 !Important;
-    border: solid 1px #5A4181;
+    background-color: black !Important;
+    border: solid 1px white;
 }
 
 .avatar {
@@ -35,9 +35,25 @@
   height: 50px;
 }
 
+.big-avatar {
+  display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+}
+
 .avatar img {
   width:100%;
   height:100%;
   object-fit: cover;
   position: relative;
 }
+
+.big-avatar img {
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  position: relative;
+}
+

@@ -8,12 +8,24 @@
     <h1>{{ post.title }}</h1>
     <h5>Categories: {% for category in post.category.all %} {{ category.name }} / {% endfor %}</h5>
     {{ post.content|safe }}
+    <span class="avatar">
+        {% if post.author.profile.avatar %}
+            <img src="{{ post.author.profile.avatar.url }}">
+        {% else %}
+            <img src="{% static 'img/default_user.png' %}">
+        {% endif %}
+    </span>
     <p>Author: {{ post.author }}</p>
     <p>{{ post.date_added|date:"d.m.Y" }}</p>
     <hr>
     {% if user == post.author %}
-        <button class="btn btn-danger"><a href="{% url 'NewsBoard:post-delete' post.id %}">Delete </a></button>
-        <button class="btn btn-danger"><a href="{% url 'NewsBoard:post-edit' post.id %}">Edit </a></button>
+        <form action="{% url 'NewsBoard:post-delete' post.id %}">
+            <button name="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Delete</button>
+        </form>
+        <br>
+        <form action="{% url 'NewsBoard:post-edit' post.id %}">
+            <button name="submit" class="btn btn-warning"><i class="bi bi-pencil-fill"></i> Edit</button>
+        </form>
     {% else %}
         {% if user not in post.liked.all %}
             <button class="btn btn-success"><a href="{% url 'NewsBoard:post-like' post.id %}">Super</a></button>
@@ -38,6 +50,7 @@
                 {% endif %}
             </span>
             {{ message.sender.username }}
+            <br>
             <div style="text-align: right;">{{ message.date_added|date:"d.m.Y"}}</div>
             <hr>
         {% endfor %}

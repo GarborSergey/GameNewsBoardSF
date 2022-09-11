@@ -4,11 +4,14 @@
 
 {% block content %}
     <h1>{{ user.username }}</h1>
-    <p>{{ user.first_name }}</p>
-    <p>{{ user.last_name }}</p>
+    <p>First name: {{ user.first_name }}</p>
+    <p>Last name: {{ user.last_name }}</p>
     {% if user.profile.avatar %}
-        <img src="{{ user.profile.avatar.url }}">
+        <span class="big-avatar">
+            <img src="{{ user.profile.avatar.url }}">
+        </span>
     {% endif %}
+    <br>
     <a href="{% url 'myaccount:profile-update' %}">Update Profile</a> |
     <a href="{% url 'account_email' %}">Manage Email</a> |
     <a href="{% url 'account_change_password' %}">Change Password</a> |
